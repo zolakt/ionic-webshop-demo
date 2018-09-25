@@ -1,0 +1,39 @@
+<div class="ion-page">
+	<ion-header>
+		<ion-toolbar>
+			<ion-title>Checkout</ion-title>
+		</ion-toolbar>
+	</ion-header>
+
+	<ion-content padding>
+		<form (ngSubmit)="generateOrder()" *ngIf="!success && hasItems">
+			<shopping-cart></shopping-cart>
+
+			<fieldset margin-top>
+				<legend>Order Details</legend>
+				<ion-item *ngIf="model">
+					<ion-label position="floating">User</ion-label>
+					<ion-input [(ngModel)]="model.user" name="user"></ion-input>
+				</ion-item>
+
+				<ion-item>
+					<ion-label>Package Color</ion-label>
+					<ion-select interface="action-sheet" value="brown" ok-text="Okay" cancel-text="Dismiss">
+						<ion-select-option value="brown">Brown</ion-select-option>
+						<ion-select-option value="blonde">Blonde</ion-select-option>
+						<ion-select-option value="black">Black</ion-select-option>
+						<ion-select-option value="red">Red</ion-select-option>
+					</ion-select>
+				</ion-item>
+			</fieldset>
+
+			<div text-center padding-top>
+				<ion-button size="large" title="Order" type="submit">ORDER</ion-button>
+			</div>
+		</form>
+		<div text-center *ngIf="!hasItems">
+			<h2 *ngIf="success">Order Processed!</h2>
+			<ion-button size="large" title="Order" routerLink="/shop">Back to shop</ion-button>
+		</div>
+	</ion-content>
+</div>

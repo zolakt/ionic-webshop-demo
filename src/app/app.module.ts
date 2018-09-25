@@ -1,23 +1,37 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule, RouteReuseStrategy } from '@angular/router';
+import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
+import { RefactoraStorageModule } from '@ngx-refactora/common';
+import { RefactoraCartModule } from '@ngx-refactora/cart';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ShopModule } from './core/shop/shop.module';
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
-  ],
-  bootstrap: [AppComponent]
+	declarations: [AppComponent],
+	entryComponents: [],
+	imports: [
+		BrowserModule,
+		IonicModule.forRoot(),
+		AppRoutingModule,
+		RefactoraCartModule.forRoot(),
+		RefactoraStorageModule.forRoot(),
+		ShopModule.forRoot()
+	],
+	providers: [
+		StatusBar,
+		SplashScreen,
+		{
+			provide: RouteReuseStrategy,
+			useClass: IonicRouteStrategy
+		}
+	],
+	bootstrap: [AppComponent]
 })
 export class AppModule {}

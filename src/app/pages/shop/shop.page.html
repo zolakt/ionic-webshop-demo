@@ -1,0 +1,38 @@
+<div class="ion-page">
+	<ion-header>
+		<ion-toolbar>
+			<ion-title>Shop2</ion-title>
+		</ion-toolbar>
+	</ion-header>
+
+	<ion-content padding>
+		<div class="autocomplete">
+			<ion-searchbar (ionInput)="search($event.target.value)" debounce=500>
+			</ion-searchbar>
+		</div>
+
+		<ion-list>
+			<ion-item *ngFor="let res of products" [class.item-interactive]="true">
+				<ion-avatar *ngIf="res.imageUrl" slot="start"><img [src]="res.imageUrl" /></ion-avatar>
+				<ion-label>
+					<h2>{{ res.title }}</h2>
+					<h3>#{{ res.id }}</h3>
+				</ion-label>
+				<ng-container *ngIf="checkQuantity(res); else quantityElse">
+					<ion-button slot="end" shape="round" size="small" title="Remove 1" (click)="removeProduct(res)">
+						<ion-icon name="remove"></ion-icon>
+					</ion-button>
+					<ion-input slot="end" type="numeric" inputmode="numeric" [value]="checkQuantity(res)"></ion-input>
+					<ion-button slot="end" shape="round" size="small" title="Add 1" (click)="addProduct(res)">
+						<ion-icon name="add"></ion-icon>
+					</ion-button>
+				</ng-container>
+				<ng-template #quantityElse>
+					<ion-button slot="end" size="default" shape="round" title="Add 1" (click)="addProduct(res)">
+						<ion-icon name="add"></ion-icon> Add to cart
+					</ion-button>
+				</ng-template>
+			</ion-item>
+		</ion-list>
+	</ion-content>
+</div>

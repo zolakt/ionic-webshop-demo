@@ -1,0 +1,21 @@
+﻿<ng-container *ngIf="items?.length">
+	<ion-item *ngFor="let item of items" [class.cart-items]="true" [class.item-interactive]="true">
+		<ion-avatar slot="start">
+			<img [src]="item?.imageUrl || 'https://placehold.it/85x85'" />
+		</ion-avatar>
+		<ion-label>
+			<h2>{{ item.title }}</h2>
+		</ion-label>
+		<ion-button slot="end" shape="round" size="small" title="Remove All" (click)="removeItem(item, true)">
+				<ion-icon name="trash"></ion-icon>
+			</ion-button>
+		<ion-button slot="end" shape="round" size="small" title="Remove 1" (click)="removeItem(item)">
+			<ion-icon name="remove"></ion-icon>
+		</ion-button>
+		<ion-input slot="end" type="numeric" inputmode="numeric" [value]="item.quantity"></ion-input>
+		<ion-button slot="end" shape="round" size="small" title="Add 1" (click)="addItem(item)">
+			<ion-icon name="add"></ion-icon>
+		</ion-button>
+	</ion-item>
+</ng-container>
+<p *ngIf="!items?.length">Cart is empty</p>
